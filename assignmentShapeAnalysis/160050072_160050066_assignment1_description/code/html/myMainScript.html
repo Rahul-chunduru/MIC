@@ -1,0 +1,226 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Loading shapes</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-02-01"><meta name="DC.source" content="myMainScript.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Loading shapes</h1><pre class="codeinput">load(<span class="string">"../data/ellipse/data/data/ellipse_data.mat"</span>);
+helper(shapes);
+
+
+load(<span class="string">"../data/hand/data.mat"</span>) ;
+shapes1 = permute(shapes, [2, 1, 3]);
+shapes2 = reshape(shapes1, [112 40]);
+helper(shapes2);
+
+load(<span class="string">"../data/brain/data/data/brain_data.mat"</span>);
+shapes1 = permute(shapes, [2, 1, 3]);
+shapes2 = reshape(shapes1, [64, 40]);
+helper(shapes2);
+
+load(<span class="string">"../data/leaf/data/leaf_data.mat"</span>);
+shapes1 = permute(shapes, [2, 1, 3]);
+shapes2 = reshape(shapes1, [64, 30]);
+helper(shapes2);
+</pre><pre class="codeoutput">
+ans =
+
+    0.0054
+    0.0016
+    0.0010
+    0.0007
+    0.0005
+
+
+ans =
+
+    32    87
+
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+
+ans =
+
+    0.0148
+    0.0039
+    0.0018
+    0.0005
+    0.0004
+
+
+ans =
+
+   112    40
+
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+
+ans =
+
+   1.0e-03 *
+
+    0.9463
+    0.3600
+    0.2767
+    0.1790
+    0.1056
+
+
+ans =
+
+    64    40
+
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+
+ans =
+
+    0.0091
+    0.0033
+    0.0015
+    0.0008
+    0.0004
+
+
+ans =
+
+    64    30
+
+</pre><img vspace="5" hspace="5" src="myMainScript_01.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_02.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_03.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_04.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_05.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_06.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_07.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_08.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_09.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_10.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_11.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_12.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_13.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_14.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_15.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_16.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_17.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_18.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_19.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_20.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_21.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_22.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_23.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_24.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_25.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_26.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_27.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_28.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_29.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_30.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_31.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_32.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_33.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_34.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_35.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_36.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Loading shapes
+load("../data/ellipse/data/data/ellipse_data.mat");
+helper(shapes);
+
+
+load("../data/hand/data.mat") ;
+shapes1 = permute(shapes, [2, 1, 3]);
+shapes2 = reshape(shapes1, [112 40]); 
+helper(shapes2); 
+
+load("../data/brain/data/data/brain_data.mat");
+shapes1 = permute(shapes, [2, 1, 3]);
+shapes2 = reshape(shapes1, [64, 40]); 
+helper(shapes2); 
+
+load("../data/leaf/data/leaf_data.mat");
+shapes1 = permute(shapes, [2, 1, 3]);
+shapes2 = reshape(shapes1, [64, 30]); 
+helper(shapes2); 
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
