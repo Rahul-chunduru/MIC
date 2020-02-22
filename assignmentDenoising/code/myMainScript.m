@@ -25,15 +25,17 @@ IX = I1;
 display(RRMSE(I, IX));
 
 step = 0.1; 
-alpha = 0.5; 
+alpha = 0.0000001; 
+sigma = 4.3e-4 ;
 
-p = compute_function(IX, I1, @guassianN, @MRF1, alpha); 
+p = compute_function(IX, I1, @guassianN, @MRF1, alpha, sigma); 
 
 for i = 1:10
-    dI = compute_function(IX, I1, @guassianGrad, @gradMRF1, alpha); 
+    dI = compute_function(IX, I1, @guassianGrad, @gradMRF1, alpha, sigma); 
     It = IX - step * dI ;
-    if p < compute_function(It, I1, @guassianN, @MRF1, alpha)
-        IX = It ; 
+    IX = It ;
+    if p < compute_function(It, I1, @guassianN, @MRF1, alpha, sigma)
+         
         step = 1.1 * step ; 
     else
         step = 0.5 * step ; 
