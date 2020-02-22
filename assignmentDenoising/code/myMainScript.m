@@ -22,11 +22,25 @@ display(e3) ;
 
 IX = I1;
 
+display(RRMSE(I, IX));
+
 step = 0.1; 
-for i = 1:100
-    dI = gradientDescent1(IX, I1); 
-    I
+alpha = 0.5; 
+
+p = compute_function(IX, I1, @guassianN, @MRF1, alpha); 
+
+for i = 1:10
+    dI = compute_function(IX, I1, @guassianGrad, @gradMRF1, alpha); 
+    It = IX - step * dI ;
+    if p < compute_function(It, I1, @guassianN, @MRF1, alpha)
+        IX = It ; 
+        step = 1.1 * step ; 
+    else
+        step = 0.5 * step ; 
+    end
 end
+
+display(RRMSE(I, IX)); 
 
 
 
