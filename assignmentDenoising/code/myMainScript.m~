@@ -22,10 +22,8 @@ display(e3) ;
 
 IX = I1;
 
-step = 0.1; 
 for i = 1:100
-    dI = gradientDescent1(IX, I1); 
-    I
+    gradientDescent
 end
 
 
