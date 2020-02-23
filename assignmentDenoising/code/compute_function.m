@@ -1,6 +1,6 @@
 %% computes posterior function and gradient. Ix - current 
 
-function [Ig] = compute_function(Ix, Iy, funcX, funcV, alpha, sig)
+function [Ig] = compute_function(Ix, Iy, funcX, funcV, alpha, sig, gamma)
     [m,n] = size(Ix);
     Ig = zeros(m,n);
     for i = 1:m
@@ -27,7 +27,7 @@ function [Ig] = compute_function(Ix, Iy, funcX, funcV, alpha, sig)
                 i5 = Ix(i, 1); 
             end
             
-            fV = funcV(i1 - i2) + funcV(i1 - i3) + funcV(i1 - i4) + funcV(i1 - i5) ;
+            fV = funcV(i1 - i2, gamma) + funcV(i1 - i3, gamma) + funcV(i1 - i4, gamma) + funcV(i1 - i5, gamma);
             Ig(i, j) = alpha * funcX(Ix(i,j) - Iy(i,j), sig) + (1 - alpha)*fV;
             
         end

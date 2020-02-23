@@ -14,9 +14,7 @@ e1 = RRMSE(I, I1) ;
 e2 = RRMSE(I, I2) ; 
 e3 = RRMSE(I, I3) ; 
 
-display(e1) ; 
-display(e2) ; 
-display(e3) ; 
+% display(e1); display(e2); display(e3);
 
 %% Gradient descent algorithm
 
@@ -25,16 +23,19 @@ IY = I2 ;
 
 display(RRMSE(I, IX));
 
-step = 0.022; 
+step = 0.018; 
 alpha = 0.03; 
 sigma = 0.0525;
 
 p = sum(sum(compute_function(IX, IY, @guassianN, @MRF1, alpha, sigma))); 
+improv = 1 ; 
 
-for i = 1:30
+while improv > 1e-5
     dI = compute_function(IX, IY, @guassianGrad, @gradMRF1, alpha, sigma); 
     It = IX - step * dI ;
-    if p > sum(sum(compute_function(It, IY, @guassianN, @MRF1, alpha, sigma)))         
+    pt = p - sum(sum(compute_function(It, IY, @guassianN, @MRF1, alpha, sigma))) ; 
+    if pt >= 0
+        improv = pt ; 
         step = 1.1 * step ;
         IX = It; 
     else
