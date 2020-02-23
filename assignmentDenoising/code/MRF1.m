@@ -1,3 +1,3 @@
-function v = MRF1(u, gamma)
+function v = MRF1(u, ~)
   v = u * u ; 
 end

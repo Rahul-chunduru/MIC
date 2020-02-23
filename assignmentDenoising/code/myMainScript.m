@@ -18,16 +18,20 @@ e3 = RRMSE(I, I3) ;
 
 %% Gradient descent algorithm
 
-alpha = 0.003; 
-sigma = 0.0525;  
-gamma = 0.01 ; 
-IX = I1;
+alpha = 0.0001; 
+sigma = 0.0622;  
+gamma = 0.1; 
+IX = I3;
 
 display(RRMSE(I, IX)); 
 
-I_denoised = gradient_Descent(IX, sigma, alpha, gamma); 
+I_denoised = gradient_Descent(IX, sigma, alpha, gamma, @MRF1, @gradMRF1); 
+I_denoised1 = gradient_Descent(IX, sigma, alpha, gamma, @MRF2, @gradMRF2); 
+I_denoised2 = gradient_Descent(IX, sigma, alpha, gamma, @MRF3, @gradMRF3); 
 
-display(RRMSE(I, I_denoised)); 
+display(RRMSE(I, I_denoised));
+display(RRMSE(I, I_denoised1));
+display(RRMSE(I, I_denoised2));
 
 
 
