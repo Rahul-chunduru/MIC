@@ -8,6 +8,8 @@ Rt_I = radon(I, theta);
 
 wmax = 0.5 ; 
 
+I_unfil = iradon(Rt_I, theta); 
+
 I_ramlak1 = fbt(Rt_I, theta, @ramlak, wmax);
 I_ramlak2 = fbt(Rt_I, theta, @ramlak, wmax/2);
 
@@ -36,4 +38,35 @@ title('Cosine - wmax');
 subplot(4, 2, 8), imshow(I_cosine2, []);
 title('Cosine - wmax');
 
+%% Similarities and Differences of different reconstructed images
+% .. 
+
+
 %% part (b)
+
+S0 = I ; 
+S1 = imgaussfilt(I, 1) ;
+S5 = imgaussfilt(I, 5) ; 
+
+% show the three versions of shepp-logan
+figure ; 
+subplot( 1 ,3 , 1), imshow(S0) ; 
+title('Shepp-logan \sigma = 0') ; 
+subplot( 1 ,3 , 2), imshow(S1) ; 
+title('Shepp-logan \sigma = 1') ; 
+subplot( 1 ,3 , 3), imshow(S5) ; 
+title('Shepp-logan \sigma = 5') ;
+
+% computing RRSMSE of Ramlek-filter back projections. 
+
+
+
+
+
+
+
+
+
+
+
+
