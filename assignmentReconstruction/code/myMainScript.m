@@ -114,6 +114,36 @@ ylabel('RRMSE value') ;
 % This is to be expected as L increases, the inverse radon transfrom is
 % more accurate. 
 
+%% Q3 - Incomplete data filtering
+
+
+%%  part (i) 
+
+I_sl = im2double(imread('../data/SheppLogan256.png'));
+I_ct = im2double(imread('../data/ChestCT.png'));
+
+[theta, r1] = part3_1(I_sl); 
+[~, r2] = part3_1(I_ct); 
+
+% ploting values
+figure;
+title('RRMSE vs \theta - Shepp-logan image');
+plot(theta, r1);
+% Minima at theta = 106
+
+figure;
+title('RRMSE vs \theta - Chest CT image');
+plot(theta, r2);
+% Minima at theta = 54
+
+%% part 2
+
+I_sl_res = part3_2(I_sl, 106);
+I_ct_res = part3_2(I_ct, 54);
+
+figure; 
+subplot(1, 2, 1), imshow(I_sl_res);
+subplot(1, 2, 2), imshow(I_ct_res);
 
 
 
