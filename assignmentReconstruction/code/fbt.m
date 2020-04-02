@@ -1,4 +1,4 @@
-function I_rec = fbt(Rt_I, theta, filter, L)
+function I_rec = fbt(Rt_I, theta, filter, L, output_size)
 
 % into frequency domain
 
@@ -18,7 +18,7 @@ end
 % reconstruct the image
 
 Rt_filt = real(ifft(ifftshift(Rt_filt)));
-I_rec = iradon(Rt_filt, theta, 'linear', 'none');
+I_rec = iradon(Rt_filt, theta, 'linear', 'none', output_size);
 
 
 end
