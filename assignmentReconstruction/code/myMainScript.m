@@ -76,8 +76,11 @@ e5 = RRMSE(S5, R5);
 display(e0), display(e1), display(e5); 
 
 % The computed RRMSE values are, e0 = 0.5046, e1 = 0.4573, e5 = 0.4114 
-% Therefore, e5 < e1 < e0. Hence, it is easier to reconstruct a blury image than a non-blurry image. 
-% but why?
+% Therefore, e5 < e1 < e0. Hence, it is easier to reconstruct a blury image   
+% than a non-blurry image. 
+% This is because, blurrier images have much smoother radon transform w.r.t
+% \theta. Hence, sampling theta in multiples of 3, won't produce as many
+% artifacts as in an image with clear edges. 
 %
 
 %%  Part c 
