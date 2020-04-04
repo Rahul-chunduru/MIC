@@ -23,3 +23,5 @@ lambda = 0.1;
 I4 = inv((A'*A + lambda)A'*R_noisy
 
 %% (2.5)
+
+
