@@ -1,10 +1,10 @@
 %% Reading image
 
-I = im2double(imread("../data/ChestPhantom.png"));
+I = im2double(imread('../data/ChestPhantom.png'));
 [M, N] = size(I);
 
 %% CT_imageing (2.1)
-drho = 3;
+drho = 2;
 dtheta = 1;
 th = 0 : dtheta : 180-dtheta ;
 A = Radon_matrix(drho, dtheta, M, N);
@@ -14,13 +14,22 @@ A = Radon_matrix(drho, dtheta, M, N);
 R = A*I(:);
 [R_m, ~] = size(R);
 noise = (0.02)*(max(R) - min(R))*randn(size(R));
-R_noisy = R + noise;
-R_noisy = reshape(R_noisy, R_m/180, 180);
+R_noisy_row = R + noise;
+R_noisy = reshape(R_noisy_row, R_m/180, 180);
 R_noisy = flip(R_noisy);
+
 %% (2.3)
 
-I_noisy = iradon(R_noisy, th, 'linear', 'Ram-Lak');
+I_noisy = iradon(R_noisy, th, 'linear', 'Ram-Lak', 128);
+I_noisy = I_noisy / max(max(I_noisy)) ; 
+
+% plot
+figure;
+title(
 imshow(I_noisy, []);
+% rrmse values
+e1 = RRMSE(I, I_noisy) ; 
+
 
 %% (2.4)
 
@@ -31,49 +40,35 @@ b = R_noisy(:);
 I4 = gradient_descent_L2(A, b, alpha, eps, M*N, 1);
 
 %%
+
 I4 = reshape(I4, M, N);
 I4 = flip(I4);
 e = RRMSE(I4,I) ; 
+figure; 
 imshow(I4, []);
 % e = RRMSE(I4, I)
 % imshow(I4)
 
 %% (2.5)
 
+% I_rec = part2_5(zeros(size(I)), R_noisy_row, A, @MRF1, @gradMRF1);
 I_rec = I_noisy ; 
-improv = 1 ; 
-iter = 0  ;
-lambda = 0.5 ; 
-step_size = 1 ; 
-gamma = 0.05; 
-
-e_curr = objective_func(I_rec, A, R_noisy, lambda, @MRF1, gamma); 
-
-while iter < 50
-
-    dI = reshape(2 * A' * ( A * (I_rec(:)) - R_noisy), size(I)) ; 
-    dI = dI + lambda * compute_function(I_rec, @gradMRF2, gamma);
-    I_next = I_rec - step_size * dI; 
-
-    e_next = objective_func(I_next, A, R_noisy, lambda, @MRF2, gamma); 
-
-    if e_next < e_curr
-        e_curr = e_next ; 
-        step_size = step_size / 2 ; 
-        I_rec = I_next ; 
-    else
-        step_size = step_size * 0.1 ; 
-    end
-
-    iter = iter + 1 ;
-
-end
 
 % Image from prior-iterative reconstruction. 
-figure; 
-imshow(I_rec); 
+
+% squared 
+I_rec1 = part2_5(zeros(size(I)), R_noisy_row, A, @MRF1, @gradMRF1);
+% huber
+I_rec2 = part2_5(zeros(size(I)), R_noisy_row, A, @MRF1, @gradMRF1);
+% Discontinuity adaptive
+I_rec3 = part2_5(zeros(size(I)), R_noisy_row, A, @MRF1, @gradMRF1);
+
+
+imshow(I_rec, []); 
 
 % RRMSE values
+
+% Squared loss, parameters :- lambda, 
 
 
 

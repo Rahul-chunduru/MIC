@@ -1,14 +1,14 @@
-function I_rec = part2_5(I_noisy, R_noisy, A, MRF_func, MRF_gradfunc)
+function I_rec = part2_5(I, I_noisy, R_noisy, A, MRF_func, MRF_gradfunc)
 
 I_rec = I_noisy ; 
 iter = 0  ;
-lambda = 0.5 ; 
+lambda = 0.5; 
 step_size = 1 ; 
-gamma = 0.05; 
+gamma = 0.03; 
 
 e_curr = objective_func(I_rec, A, R_noisy, lambda, MRF_func, gamma); 
 
-while iter < 50
+while iter < 30
 
     dI = reshape(2 * A' * ( A * (I_rec(:)) - R_noisy), size(I_rec)) ; 
     dI = dI + lambda * compute_function(I_rec, MRF_gradfunc, gamma);
@@ -28,5 +28,8 @@ while iter < 50
 
 end
 
+I_rec = I_rec / max(max(I_rec)) ; 
+e = RRMSE(I, I_rec) ; 
+display(e) ; 
 
 end
