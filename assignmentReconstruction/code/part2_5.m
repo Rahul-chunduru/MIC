@@ -1,10 +1,8 @@
-function I_rec = part2_5(I, I_noisy, R_noisy, A, MRF_func, MRF_gradfunc)
+function I_rec = part2_5(I, I_noisy, R_noisy, A, MRF_func, MRF_gradfunc, lambda, gamma)
 
 I_rec = I_noisy ; 
-iter = 0  ;
-lambda = 0.5; 
-step_size = 1 ; 
-gamma = 0.03; 
+iter = 0  ; 
+step_size = 1;  
 
 e_curr = objective_func(I_rec, A, R_noisy, lambda, MRF_func, gamma); 
 
@@ -18,10 +16,10 @@ while iter < 30
 
     if e_next < e_curr
         e_curr = e_next ; 
-        step_size = step_size / 2 ; 
+        step_size = step_size * 1.1 ; 
         I_rec = I_next ; 
     else
-        step_size = step_size * 0.1 ; 
+        step_size = step_size / 2; 
     end
 
     iter = iter + 1 ;

@@ -119,7 +119,7 @@ ylabel('RRMSE value') ;
 
 %% Q2 - Image reconstruction using Filter back projection and prior iterations. 
 
-
+myMainscript2;
 
 %% Q3 - Incomplete data filtering
 
