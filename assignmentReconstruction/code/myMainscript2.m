@@ -1,68 +1,41 @@
 %% Reading image
 
-I = im2double(imread('../data/ChestPhantom.png'));
-theta = 0:179 ; 
+I = im2double(imread("../data/ChestPhantom.png"));
 [M, N] = size(I);
 
 %% CT_imageing (2.1)
-drho = 3;
+drho = 5;
 dtheta = 1;
+th = 0 : dtheta : 180-dtheta ;
 A = Radon_matrix(drho, dtheta, M, N);
-
+size(A)
 %% (2.2)
 
-R = A * I(:);
-range = max(R) - min(R) ; 
-R_noisy = R + randn(size(R)) * range * 0.02 ; 
-
+R = A*I(:);
+[R_m, ~] = size(R);
+noise = (0.02)*(max(R) - min(R))*randn(size(R));
+R_noisy = R + noise;
+R_noisy = reshape(R_noisy, R_m/180, 180);
+R_noisy = flip(R_noisy);
 %% (2.3)
 
-Rt_I_noisy = reshape(R_noisy, [], 180) ; 
-
-I_noisy = iradon(Rt_I_noisy, theta, 'linear', 'Ram-Lak', 128);
-
-figure ; 
-imshow(I_noisy) ; 
+I_noisy = iradon(R_noisy, th, 'linear', 'Ram-Lak');
+imshow(I_noisy, []);
 
 %% (2.4)
 
-lambda = 0.1;
-I4 = (A'*A + lambda)\A' * R_noisy ; 
+alpha = 1; 
+eps = 0.0001;
+% I4 = inv((A'*A + lambda))*(A'*R_noisy);
+b = R_noisy(:);
+I4 = gradient_descent_L2(A, b, alpha, eps, M*N, 1);
+
+%%
+I4 = reshape(I4, M, N);
+I4 = flip(I4);
+e = RRMSE(I4,I)
+imshow(I4, []);
+% e = RRMSE(I4, I)
+% imshow(I4)
 
 %% (2.5)
-
-I_rec = I_noisy ; 
-improv = 1 ; 
-iter = 0  ;
-lambda = 0.5 ; 
-step_size = 1 ; 
-gamma = 0.05; 
-
-e_curr = objective_func(I_rec, A, R_noisy, lambda, @MRF1, gamma); 
-
-while iter < 200
-        
-    dI = reshape(2 * A' * ( A * (I_rec(:)) - R_noisy), size(I)) ; 
-    dI = dI + lambda * compute_function(I_rec, @gradMRF2, gamma);
-    I_next = I_rec - step_size * dI; 
-   
-    e_next = objective_func(I_next, A, R_noisy, lambda, @MRF2, gamma); 
-    
-    if e_next < e_curr
-        e_curr = e_next ; 
-        step_size = step_size / 2 ; 
-        I_rec = I_next ; 
-    else
-        step_size = step_size * 0.1 ; 
-    end
-    
-    iter = iter + 1 ;
-   
-end
-
-figure; 
-imshow(I_rec); 
-
-
-
-
