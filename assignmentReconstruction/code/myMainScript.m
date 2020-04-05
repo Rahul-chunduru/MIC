@@ -117,31 +117,9 @@ ylabel('RRMSE value') ;
 % This is to be expected as L increases, the inverse radon transfrom is
 % more accurate. 
 
-%% Reading image
+%% Q2 - Image reconstruction using Filter back projection and prior iterations. 
 
-I = imread("../data/ChestPhantom.png");
-[M, N] = size(I);
 
-%% CT_imageing (2.1)
-drho = 5;
-dtheta = 1;
-A = Radon_matrix(drho, dtheta, M, N);
-
-%% (2.2)
-
-R = A*I(:);
-R_noisy = imnoise(R, 'gaussian', 0, 0.02);
-
-%% (2.3)
-
-I_noisy = iradon(R_noisy, th, 'linear', 'Ram-Lak');
-
-%% (2.4)
-
-lambda = 0.1;
-I4 = inv((A'*A + lambda)A'*R_noisy
-
-%% (2.5)
 
 %% Q3 - Incomplete data filtering
 
